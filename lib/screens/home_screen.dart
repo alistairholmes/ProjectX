@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project_x/screens/add_currency_screen.dart';
+import 'package:project_x/widgets/currency_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -7,15 +9,26 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Project X'),
+        title: Text('Project X'),
+        centerTitle: true,
       ),
       body: Column(
-        children: const [Text('Todays Rates')],
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Todays Rates'),
+          ),
+          CurrencyCard(),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AddCurrency()));
+        },
         tooltip: 'Add Currency',
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
       ),
     );
   }
