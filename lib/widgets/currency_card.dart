@@ -13,11 +13,13 @@ class CurrencyCard extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('ZAR'),
+                child:
+                    Text('ZAR', style: TextStyle(fontWeight: FontWeight.bold)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('16.00'),
+                child: Text('16.00',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               )
             ],
           ),

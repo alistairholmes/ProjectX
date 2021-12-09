@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_x/screens/add_currency_screen.dart';
 import 'package:project_x/widgets/currency_card.dart';
@@ -9,15 +10,22 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Project X'),
+        title: Text(
+          'Project X',
+          style: TextStyle(),
+        ),
         centerTitle: true,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('Todays Rates'),
+            child: Text(
+              'Today\'s Rates',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           CurrencyCard(),
         ],
