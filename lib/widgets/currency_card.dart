@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CurrencyCard extends StatelessWidget {
+  CurrencyCard({this.currencyCode, @required this.currencyRate});
+  final String? currencyCode;
+  final double? currencyRate;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,12 +17,12 @@ class CurrencyCard extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child:
-                    Text('ZAR', style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Text(currencyRate.toString(),
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('16.00',
+                child: Text(currencyRate.toString(),
                     style: TextStyle(fontWeight: FontWeight.bold)),
               )
             ],
