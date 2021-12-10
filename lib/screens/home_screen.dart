@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Project X',
-          style: TextStyle(),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -32,13 +32,13 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Center(
-              child: FutureBuilder<Rates?>(
+              child: FutureBuilder<RatesModel?>(
             future: _client.getLatestRates(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                Rates? data = snapshot.data;
+                RatesModel? data = snapshot.data;
                 return CurrencyCard(
-                  currencyRate: data!.gBP,
+                  currencyRate: data!.rates!.eUR,
                 );
               }
               return CircularProgressIndicator();

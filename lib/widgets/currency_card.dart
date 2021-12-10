@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_x/data/models/rates_model.dart';
 
 class CurrencyCard extends StatelessWidget {
   CurrencyCard({this.currencyCode, @required this.currencyRate});

@@ -6,14 +6,16 @@ class RatesModel {
   Rates? rates;
 
   RatesModel(
-      {this.disclaimer, this.license, this.timestamp, this.base, this.rates});
+      this.disclaimer, this.license, this.timestamp, this.base, this.rates);
 
-  RatesModel.fromJson(Map<String, dynamic> json) {
-    disclaimer = json['disclaimer'];
-    license = json['license'];
-    timestamp = json['timestamp'];
-    base = json['base'];
-    rates = json['rates'] != null ? new Rates.fromJson(json['rates']) : null;
+  factory RatesModel.fromJson(dynamic json) {
+    return RatesModel(
+      json['disclaimer'] as String,
+      json['license'] as String,
+      json['timestamp'] as int,
+      json['base'] as String,
+      Rates.fromJson(json['rates']),
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -35,13 +37,20 @@ class Rates {
   double? eUR;
   double? gBP;
 
-  Rates({this.aED, this.cAD, this.eUR, this.gBP});
+  Rates(this.aED, this.cAD, this.eUR, this.gBP);
 
-  Rates.fromJson(Map<String, dynamic> json) {
-    aED = json['AED'];
+  factory Rates.fromJson(dynamic json) {
+    return Rates(
+      json['AED'] as double,
+      json['CAD'] as double,
+      json['EUR'] as double,
+      json['GBP'] as double,
+    );
+
+    /*aED = json['AED'];
     cAD = json['CAD'];
     eUR = json['EUR'];
-    gBP = json['GBP'];
+    gBP = json['GBP'];*/
   }
 
   Map<String, dynamic> toJson() {

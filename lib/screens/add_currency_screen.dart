@@ -7,7 +7,8 @@ class AddCurrency extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Currency'),
+        title: Text('Select Currency',
+            style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
       body: Column(
