@@ -31,18 +31,34 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          Center(
-              child: FutureBuilder<RatesModel?>(
-            future: _client.getLatestRates(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                RatesModel? data = snapshot.data;
-                return CurrencyCard(
-                  currencyRate: data!.rates!.eUR,
-                );
-              }
-              return CircularProgressIndicator();
-            },
+          Expanded(
+              child: Center(
+            child: FutureBuilder<Map<dynamic, dynamic>>(
+              future: _client.getLatestRates(),
+              builder: (context, snapshot) {
+                List? currencies = [];
+                List? currentRates = [];
+                if (snapshot.hasData) {
+                  for (final currency in snapshot.data!.keys) {
+                    final value = snapshot.data![currency];
+                    //print('$currency'); //
+                    //print('$value'); // prints entries like "AED,3.672940"
+                    currencies.add(currency);
+                    currentRates.add(value);
+                  }
+                  return ListView.builder(
+                      shrinkWrap: false,
+                      itemCount: currencies!.length,
+                      itemBuilder: (context, index) {
+                        return CurrencyCard(
+                          currencyCode: currencies![index],
+                          currencyRate: currentRates![index],
+                        );
+                      });
+                }
+                return CircularProgressIndicator();
+              },
+            ),
           )),
         ],
       ),
