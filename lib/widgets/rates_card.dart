@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:project_x/data/models/rates_model.dart';
 
-class CurrencyCard extends StatelessWidget {
-  CurrencyCard({this.currencyCode, @required this.currencyName});
+class RatesCard extends StatelessWidget {
+  RatesCard({this.currencyCode, @required this.currencyRate});
   final String? currencyCode;
-  final String? currencyName;
+  final double? currencyRate;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Container(
         child: Card(
           child: Row(
@@ -17,12 +17,12 @@ class CurrencyCard extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(currencyCode!,
+                child: Text(currencyCode.toString(),
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(currencyName!,
+                child: Text(currencyRate.toString(),
                     style: TextStyle(fontWeight: FontWeight.bold)),
               )
             ],

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_x/data/api/rates_api_client.dart';
-import 'package:project_x/data/models/rates_model.dart';
 import 'package:project_x/screens/add_currency_screen.dart';
 import 'package:project_x/widgets/currency_card.dart';
+import 'package:project_x/widgets/rates_card.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                       shrinkWrap: false,
                       itemCount: currencies!.length,
                       itemBuilder: (context, index) {
-                        return CurrencyCard(
+                        return RatesCard(
                           currencyCode: currencies![index],
                           currencyRate: currentRates![index],
                         );
