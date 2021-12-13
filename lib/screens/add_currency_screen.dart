@@ -32,11 +32,11 @@ class AddCurrency extends StatelessWidget {
                   }
                   return ListView.builder(
                       shrinkWrap: false,
-                      itemCount: currencies!.length,
+                      itemCount: currencies.length,
                       itemBuilder: (context, index) {
                         return CurrencyCard(
-                          currencyCode: currencies![index],
-                          currencyName: currentRates![index],
+                          currencyCode: currencies[index],
+                          currencyName: currentRates[index],
                         );
                       });
                 }

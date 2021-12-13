@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_x/data/api/rates_api_client.dart';
 import 'package:project_x/screens/add_currency_screen.dart';
+import 'package:project_x/screens/convert_currency_screen.dart';
 import 'package:project_x/widgets/currency_card.dart';
 import 'package:project_x/widgets/rates_card.dart';
 
@@ -48,11 +49,11 @@ class HomeScreen extends StatelessWidget {
                   }
                   return ListView.builder(
                       shrinkWrap: false,
-                      itemCount: currencies!.length,
+                      itemCount: currencies.length,
                       itemBuilder: (context, index) {
                         return RatesCard(
-                          currencyCode: currencies![index],
-                          currencyRate: currentRates![index],
+                          currencyCode: currencies[index],
+                          currencyRate: currentRates[index],
                         );
                       });
                 }
@@ -64,8 +65,8 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddCurrency()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ConvertCurrency()));
         },
         tooltip: 'Add Currency',
         child: Icon(Icons.add),
