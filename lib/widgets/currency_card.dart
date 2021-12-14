@@ -10,6 +10,7 @@ class CurrencyCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
+        height: 60,
         child: Card(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

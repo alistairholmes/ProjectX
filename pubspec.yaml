@@ -11,8 +11,11 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  dio: ^4.0.0
   http: ^0.13.4
+  flutter_secure_storage: ^5.0.2
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -31,8 +34,11 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   fonts:
-    - family: GothicA1
+    - family: Montserrat
       fonts:
-          - asset: fonts/GothicA1-Regular.ttf
-          - asset: fonts/GothicA1-Medium.ttf
-          - asset: fonts/GothicA1-Bold.ttf
+          - asset: fonts/Montserrat-Regular.ttf
+          - asset: fonts/Montserrat-Medium.ttf
+          - asset: fonts/Montserrat-Bold.ttf
+
+flutter_intl:
+  enabled: true

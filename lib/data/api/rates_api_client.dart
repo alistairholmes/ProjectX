@@ -1,12 +1,38 @@
 import 'dart:convert';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class RatesApiClient {
+  // Create storage
+  final storage = FlutterSecureStorage();
+  var savedCurrency;
+
+  // Default Currency to be loaded
+  var defaultCurrencies = 'ZAR,' + 'GBP,' + 'EUR,' + 'BWP,';
+
+  // Read database for added currencies to be monitored
+  readCurrencyFromDB() async {
+    savedCurrency = await storage.read(key: 'currency');
+  }
+
   // API call to get a list of latest rates
   Future<Map<dynamic, dynamic>> getLatestRates() async {
-    var url = Uri.parse(
-        'https://openexchangerates.org/api/latest.json?app_id=4995ae7b6a7a4e1dbeb42140db2a8303&symbols=GBP,EUR,AED,CAD');
+    // Check for saved currency
+    readCurrencyFromDB();
+
+    // Build request
+    var url;
+    if (savedCurrency != null) {
+      url = Uri.parse(
+          'https://openexchangerates.org/api/latest.json?app_id=4995ae7b6a7a4e1dbeb42140db2a8303&symbols=' +
+              defaultCurrencies +
+              savedCurrency);
+    } else {
+      url = Uri.parse(
+          'https://openexchangerates.org/api/latest.json?app_id=4995ae7b6a7a4e1dbeb42140db2a8303&symbols=' +
+              defaultCurrencies);
+    }
     final response = await http.get(url);
     final decoded = jsonDecode(response.body) as Map;
     final data = decoded['rates'] as Map;
@@ -24,32 +50,35 @@ class RatesApiClient {
     return data;
   }
 
-  // API call to convert a USD value into a currency
-
-  Future<double> getConversion() async {
-    var amountToBeConverted = 300;
-    var convertedAmount;
+  // API call to convert a USD value into another currency
+  Future<double> getConversion(
+      double amountToBeConverted, String currencyToConvert) async {
     var url = Uri.parse(
-        'https://openexchangerates.org/api/latest.json?app_id=4995ae7b6a7a4e1dbeb42140db2a8303&symbols=AED');
+        'https://openexchangerates.org/api/latest.json?app_id=4995ae7b6a7a4e1dbeb42140db2a8303&symbols=' +
+            currencyToConvert);
     final response = await http.get(url);
     final decoded = jsonDecode(response.body) as Map;
     final data = decoded['rates'] as Map;
 
+    double? convertedAmount;
+
     for (final name in data.keys) {
       final value = data[name];
       print('$value'); // prints entries like "3.672940"
-      convertedAmount = value * 300;
+      convertedAmount = value * amountToBeConverted; // multiply rate by amount
       print(convertedAmount);
     }
 
     if (amountToBeConverted > 200) {
-      convertedAmount * 1.04;
+      var add4Percent = convertedAmount! * 0.04;
+      convertedAmount = convertedAmount + add4Percent;
       print(convertedAmount);
     } else {
-      convertedAmount * 1.07;
+      var add7Percent = convertedAmount! * 0.07;
+      convertedAmount = convertedAmount + add7Percent;
       print(convertedAmount);
     }
 
-    return convertedAmount;
+    return convertedAmount.roundToDouble();
   }
 }
